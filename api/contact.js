@@ -18,8 +18,13 @@ export default async function handler(req, res) {
   const senderEmail = process.env.CONTACT_SENDER_EMAIL
   const senderName = `${name} (via Portfolio)`
 
-  if (!apiKey || !toEmail || !senderEmail) {
-    console.error('Missing Brevo configuration (BREVO_API_KEY / CONTACT_TO_EMAIL / CONTACT_SENDER_EMAIL)')
+  const missing = []
+  if (!apiKey) missing.push('BREVO_API_KEY')
+  if (!toEmail) missing.push('CONTACT_TO_EMAIL')
+  if (!senderEmail) missing.push('CONTACT_SENDER_EMAIL')
+
+  if (missing.length > 0) {
+    console.error('Missing Brevo configuration env var(s):', missing.join(', '))
     return res.status(500).json({ error: 'Email service is not configured' })
   }
 
