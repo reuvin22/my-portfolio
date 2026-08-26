@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { profile } from '../data'
-import { LocationIcon, MailIcon, SocialIcon } from './icons'
+import { CheckIcon, CopyIcon, LocationIcon, MailIcon, SocialIcon } from './icons'
 import Reveal from './Reveal'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [sent, setSent] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -16,6 +18,18 @@ export default function Contact() {
     const subject = encodeURIComponent(`Portfolio inquiry from ${form.name || 'your website'}`)
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+    setSent(true)
+    setTimeout(() => setSent(false), 6000)
+  }
+
+  async function handleCopyEmail() {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      // Clipboard API unavailable — the address is still visible in the card.
+    }
   }
 
   return (
@@ -32,18 +46,34 @@ export default function Contact() {
 
         <div className="mt-14 grid gap-10 md:grid-cols-5">
           <Reveal className="space-y-6 md:col-span-2">
-            <a
-              href={`mailto:${profile.email}`}
-              className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-indigo-300 dark:border-slate-800 dark:hover:border-indigo-700"
-            >
-              <span className="flex size-10 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
-                <MailIcon className="size-5" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold text-slate-900 dark:text-white">Email</p>
-                <p className="text-sm text-slate-600 dark:text-slate-300">{profile.email}</p>
-              </div>
-            </a>
+            <div className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-indigo-300 dark:border-slate-800 dark:hover:border-indigo-700">
+              <a
+                href={`mailto:${profile.email}`}
+                className="flex min-w-0 flex-1 items-center gap-3"
+              >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                  <MailIcon className="size-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">Email</p>
+                  <p className="truncate text-sm text-slate-600 dark:text-slate-300">
+                    {profile.email}
+                  </p>
+                </div>
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label="Copy email address"
+                className="flex size-9 shrink-0 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-indigo-600 dark:hover:bg-slate-800 dark:hover:text-indigo-400"
+              >
+                {copied ? (
+                  <CheckIcon className="size-4 text-emerald-500" />
+                ) : (
+                  <CopyIcon className="size-4" />
+                )}
+              </button>
+            </div>
 
             <div className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-800">
               <span className="flex size-10 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
@@ -121,12 +151,19 @@ export default function Contact() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-500"
-            >
-              Send Message
-            </button>
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                type="submit"
+                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-500"
+              >
+                Send Message
+              </button>
+              {sent && (
+                <p className="text-sm text-slate-600 dark:text-slate-300">
+                  Opening your email app — if nothing happens, copy the address instead.
+                </p>
+              )}
+            </div>
           </Reveal>
         </div>
       </div>
