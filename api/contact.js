@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' })
   }
 
-  const apiKey = process.env.BREVO_API_KEY
+  const apiKey = process.env.BRAVO_API_KEY
   const toEmail = process.env.CONTACT_TO_EMAIL
   // Brevo requires the sender *email* to be a verified identity — it can't be the
   // visitor's address (that would let anyone spoof arbitrary senders through your API key).
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   const senderName = `${name} (via Portfolio)`
 
   const missing = []
-  if (!apiKey) missing.push('BREVO_API_KEY')
+  if (!apiKey) missing.push('BRAVO_API_KEY')
   if (!toEmail) missing.push('CONTACT_TO_EMAIL')
   if (!senderEmail) missing.push('CONTACT_SENDER_EMAIL')
 
