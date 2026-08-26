@@ -5,7 +5,7 @@ import Reveal from './Reveal'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [copied, setCopied] = useState(false)
 
   function handleChange(e) {
@@ -13,13 +13,24 @@ export default function Contact() {
     setForm((f) => ({ ...f, [name]: value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio inquiry from ${form.name || 'your website'}`)
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
-    setSent(true)
-    setTimeout(() => setSent(false), 6000)
+    setStatus('sending')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (!res.ok) throw new Error('Request failed')
+
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+    } catch {
+      setStatus('error')
+    }
   }
 
   async function handleCopyEmail() {
@@ -154,13 +165,19 @@ export default function Contact() {
             <div className="flex flex-wrap items-center gap-4">
               <button
                 type="submit"
-                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-500"
+                disabled={status === 'sending'}
+                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send Message
+                {status === 'sending' ? 'Sending…' : 'Send Message'}
               </button>
-              {sent && (
-                <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Opening your email app — if nothing happens, copy the address instead.
+              {status === 'success' && (
+                <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                  Message sent — I&apos;ll get back to you soon!
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm font-medium text-rose-600 dark:text-rose-400">
+                  Something went wrong — email me directly at {profile.email} instead.
                 </p>
               )}
             </div>

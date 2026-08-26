@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "vercel-dev": "vercel dev",
+    "env:pull": "vercel env pull .env.development.local",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -25,6 +27,7 @@
     "eslint-plugin-react-refresh": "^0.5.4",
     "globals": "^17.11.0",
     "tailwindcss": "^4.3.3",
+    "vercel": "^59.5.0",
     "vite": "^8.2.2"
   }
 }
