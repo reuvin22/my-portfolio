@@ -10,7 +10,6 @@ export const profile = {
   socials: [
     { label: 'GitHub', href: 'https://github.com/reuvin22', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/reuvin-hernandez-a6688a26b/', icon: 'linkedin' },
-    { label: 'X / Twitter', href: 'https://x.com/', icon: 'x' },
   ],
 }
 

@@ -14,14 +14,6 @@ export function LinkedInIcon(props) {
   )
 }
 
-export function XIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M18.24 2.5h3.3l-7.2 8.23 8.47 10.77h-6.63l-5.19-6.72-5.94 6.72H1.75l7.7-8.8L1.4 2.5h6.8l4.69 6.2 5.35-6.2Zm-1.16 17.14h1.83L7.02 4.36H5.06l12.02 15.28Z" />
-    </svg>
-  )
-}
-
 export function MailIcon(props) {
   return (
     <svg
@@ -251,7 +243,7 @@ export function CheckIcon(props) {
   )
 }
 
-const socialIcons = { github: GitHubIcon, linkedin: LinkedInIcon, x: XIcon }
+const socialIcons = { github: GitHubIcon, linkedin: LinkedInIcon }
 
 export function SocialIcon({ name, ...props }) {
   const Cmp = socialIcons[name]
