@@ -20,7 +20,7 @@ export default function Education() {
 
         <ol className="mx-auto mt-14 max-w-2xl space-y-8 border-l border-slate-200 pl-8 dark:border-slate-800">
           {education.map((item, i) => (
-            <Reveal as="li" key={item.school} delay={i * 100} className="relative">
+            <Reveal as="li" key={`${item.school}-${item.degree}`} delay={i * 100} className="relative">
               <span className="absolute -left-[38.5px] flex size-6 items-center justify-center rounded-full bg-indigo-600 text-white ring-4 ring-slate-50 dark:ring-slate-900/40">
                 <CapIcon className="size-3.5" />
               </span>

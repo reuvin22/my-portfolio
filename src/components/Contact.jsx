@@ -1,12 +1,17 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { profile } from '../data'
 import { CheckIcon, CopyIcon, LocationIcon, MailIcon, SocialIcon } from './icons'
 import Reveal from './Reveal'
+import RichTextEditor from './RichTextEditor'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [messageTouched, setMessageTouched] = useState(false)
   const [copied, setCopied] = useState(false)
+  const editorRef = useRef(null)
+
+  const messageIsEmpty = form.message.replace(/<[^>]+>/g, '').trim().length === 0
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -15,6 +20,9 @@ export default function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setMessageTouched(true)
+    if (messageIsEmpty) return
+
     setStatus('sending')
 
     try {
@@ -28,6 +36,8 @@ export default function Contact() {
 
       setStatus('success')
       setForm({ name: '', email: '', message: '' })
+      setMessageTouched(false)
+      editorRef.current?.clear()
     } catch {
       setStatus('error')
     }
@@ -150,16 +160,17 @@ export default function Contact() {
               <label htmlFor="message" className="text-sm font-medium text-slate-700 dark:text-slate-200">
                 Message
               </label>
-              <textarea
+              <RichTextEditor
+                ref={editorRef}
                 id="message"
-                name="message"
-                rows={5}
-                required
-                value={form.message}
-                onChange={handleChange}
-                className="mt-1.5 w-full resize-none rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                 placeholder="Tell me about your project..."
+                onChange={(html) => setForm((f) => ({ ...f, message: html }))}
               />
+              {messageTouched && messageIsEmpty && (
+                <p className="mt-1.5 text-sm text-rose-600 dark:text-rose-400">
+                  Please write a message.
+                </p>
+              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
