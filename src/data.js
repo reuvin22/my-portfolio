@@ -56,7 +56,7 @@ export const projects = [
       { type: 'image', src: '/images/ats/Info.png' },
     ],
     liveUrl: 'https://alumni-tracking-system-tau.vercel.app/',
-    codeUrl: '#',
+    codeUrl: 'https://github.com/reuvin22/AlumniTrackingSystem',
   },
   {
     title: 'Pathfinder — Trip Planning App',
