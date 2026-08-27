@@ -53,7 +53,7 @@ export const projects = [
       { type: 'image', src: projectImage('Orbit — Dashboard', '#4f46e5', '#a78bfa') },
       { type: 'image', src: projectImage('Orbit — Widgets', '#8b5cf6', '#6366f1') },
     ],
-    liveUrl: '#',
+    liveUrl: 'https://alumni-tracking-system-tau.vercel.app/',
     codeUrl: '#',
   },
   {
