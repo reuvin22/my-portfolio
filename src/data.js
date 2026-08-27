@@ -38,7 +38,7 @@ export const projects = [
   {
     title: 'Alumni Tracking System',
     description:
-      'A real-time analytics dashboard for remote teams, with customizable widgets, role-based access, and sub-second query performance over millions of events.',
+      'A web platform for Laguna State Polytechnic University where alumni submit their post-graduation details through a public form, and administrators track employment outcomes via a dashboard with yearly trend and gender distribution reports.',
     tags: ['React', 'Firebase', 'Vercel'],
     status: 'Live',
     credentials: {
@@ -49,9 +49,11 @@ export const projects = [
       ],
     },
     media: [
-      { type: 'image', src: projectImage('Orbit — Overview', '#6366f1', '#8b5cf6') },
-      { type: 'image', src: projectImage('Orbit — Dashboard', '#4f46e5', '#a78bfa') },
-      { type: 'image', src: projectImage('Orbit — Widgets', '#8b5cf6', '#6366f1') },
+      { type: 'image', src: '/images/ats/Landing.png' },
+      { type: 'image', src: '/images/ats/Login.png' },
+      { type: 'image', src: '/images/ats/Dashboard.png' },
+      { type: 'image', src: '/images/ats/Form.png' },
+      { type: 'image', src: '/images/ats/Info.png' },
     ],
     liveUrl: 'https://alumni-tracking-system-tau.vercel.app/',
     codeUrl: '#',
