@@ -36,16 +36,16 @@ function projectImage(label, from, to) {
 
 export const projects = [
   {
-    title: 'Orbit — Team Analytics Dashboard',
+    title: 'Alumni Tracking System',
     description:
       'A real-time analytics dashboard for remote teams, with customizable widgets, role-based access, and sub-second query performance over millions of events.',
-    tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    tags: ['React', 'Firebase', 'Vercel'],
     status: 'Live',
     credentials: {
       note: 'Use these to explore the full dashboard.',
       fields: [
-        { label: 'Email', value: 'demo@orbit.app' },
-        { label: 'Password', value: 'Demo!Orbit2026' },
+        { label: 'Email', value: 'admin@alumni.test' },
+        { label: 'Password', value: 'Admin123!' },
       ],
     },
     media: [
