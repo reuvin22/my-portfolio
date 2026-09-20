@@ -5,7 +5,7 @@ export const profile = {
   location: 'Laguna, PH',
   email: 'reuvinhernandez22@gmail.com',
   summary:
-    "I'm a software engineer with 3 years of experience building reliable and user-friendly web applications, from the backend and database to the frontend, and I enjoy solving challenging problems along the way.",
+    "I'm a software engineer with 4 years of experience building reliable and user-friendly web applications, from the backend and database to the frontend, and I enjoy solving challenging problems along the way.",
   resumeUrl: '#',
   socials: [
     { label: 'GitHub', href: 'https://github.com/reuvin22', icon: 'github' },
