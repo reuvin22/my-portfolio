@@ -36,6 +36,28 @@ function projectImage(label, from, to) {
 
 export const projects = [
   {
+    title: 'RagDex — Trading Journal',
+    description:
+      'Journal every trade. Trade with an edge. RagDex turns the trades you log into an honest read on your edge and your habits — the numbers you would never assemble by hand.',
+    tags: ['React', 'TypeScript', 'FastAPI', 'Firebase'],
+    status: 'In Development',
+    credentials: {
+      note: 'Sign in with this demo account to explore the journal and dashboard.',
+      fields: [
+        { label: 'Email', value: 'demo@ragdex.app' },
+        { label: 'Password', value: 'YPfKCRLimUjzvpja' },
+      ],
+    },
+    media: [
+      { type: 'image', src: '/images/ragdex/Landing.png' },
+      { type: 'image', src: '/images/ragdex/Login.png' },
+      { type: 'image', src: '/images/ragdex/Dashboard.png' },
+      { type: 'image', src: '/images/ragdex/Calendar.png' },
+    ],
+    liveUrl: 'https://trades-sable-mu.vercel.app/',
+    codeUrl: 'https://github.com/reuvin22/trades',
+  },
+  {
     title: 'Alumni Tracking System',
     description:
       'A web platform for Laguna State Polytechnic University where alumni submit their post-graduation details through a public form, and administrators track employment outcomes via a dashboard with yearly trend and gender distribution reports.',
