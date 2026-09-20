@@ -54,8 +54,7 @@ export const projects = [
       { type: 'image', src: '/images/ragdex/Dashboard.png' },
       { type: 'image', src: '/images/ragdex/Calendar.png' },
     ],
-    liveUrl: 'https://trades-sable-mu.vercel.app/',
-    codeUrl: 'https://github.com/reuvin22/trades',
+    liveUrl: 'https://trades-z8kx.vercel.app/',
   },
   {
     title: 'Alumni Tracking System',
