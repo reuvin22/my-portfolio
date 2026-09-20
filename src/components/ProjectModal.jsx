@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { CloseIcon, ExternalLinkIcon, GitHubIcon, KeyIcon } from './icons'
 import Carousel from './Carousel'
+import { projectLinks } from '../data'
 import StatusBadge from './StatusBadge'
 
 export default function ProjectModal({ project, onClose, credentialsOpen, onShowCredentials }) {
   const closeRef = useRef(null)
+  const links = projectLinks(project)
 
   useEffect(() => {
     closeRef.current?.focus()
@@ -75,24 +77,28 @@ export default function ProjectModal({ project, onClose, credentialsOpen, onShow
           </ul>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-500"
-            >
-              Live demo
-              <ExternalLinkIcon className="size-4" />
-            </a>
-            <a
-              href={project.codeUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-indigo-400 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-indigo-500 dark:hover:text-indigo-400"
-            >
-              <GitHubIcon className="size-4" />
-              Source
-            </a>
+            {links.live && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-500"
+              >
+                Live demo
+                <ExternalLinkIcon className="size-4" />
+              </a>
+            )}
+            {links.code && (
+              <a
+                href={project.codeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-indigo-400 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-indigo-500 dark:hover:text-indigo-400"
+              >
+                <GitHubIcon className="size-4" />
+                Source
+              </a>
+            )}
             {project.credentials && (
               <button
                 type="button"

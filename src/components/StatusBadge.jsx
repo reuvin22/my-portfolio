@@ -2,6 +2,7 @@ const statusStyles = {
   Live: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300',
   'In Development': 'bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300',
   'In Revision': 'bg-sky-100 text-sky-700 dark:bg-sky-500/10 dark:text-sky-300',
+  'Under Revision': 'bg-sky-100 text-sky-700 dark:bg-sky-500/10 dark:text-sky-300',
   'Not Live': 'bg-slate-200 text-slate-600 dark:bg-slate-700/60 dark:text-slate-300',
 }
 

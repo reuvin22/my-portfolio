@@ -1,10 +1,47 @@
 import { useState } from 'react'
-import { projects } from '../data'
+import { projects, projectLinks } from '../data'
 import { ExternalLinkIcon, GitHubIcon, KeyIcon } from './icons'
 import Reveal from './Reveal'
 import ProjectModal from './ProjectModal'
 import CredentialsModal from './CredentialsModal'
 import StatusBadge from './StatusBadge'
+
+/** Descriptions longer than this get clamped to three lines with a "See more" link. */
+const DESCRIPTION_CLAMP = 110
+
+function CardLinks({ project }) {
+  const links = projectLinks(project)
+  if (!links.any) return null
+
+  return (
+    <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-slate-100 pt-4 dark:border-slate-800">
+      {links.live && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+        >
+          Live demo
+          <ExternalLinkIcon className="size-3.5" />
+        </a>
+      )}
+      {links.code && (
+        <a
+          href={project.codeUrl}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+        >
+          <GitHubIcon className="size-3.5" />
+          Source
+        </a>
+      )}
+    </div>
+  )
+}
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null)
@@ -15,7 +52,7 @@ export default function Projects() {
       id="projects"
       className="flex min-h-screen flex-col justify-center bg-slate-50 px-6 py-24 dark:bg-slate-900/40"
     >
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="mx-auto w-full max-w-7xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
             Projects
@@ -25,7 +62,7 @@ export default function Projects() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((project, i) => (
             <Reveal
               as="article"
@@ -66,47 +103,40 @@ export default function Projects() {
                 )}
               </div>
 
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
                   {project.title}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  {project.description}
-                </p>
+                <div className="mt-2 flex-1">
+                  <p className="line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    {project.description}
+                  </p>
+                  {project.description.length > DESCRIPTION_CLAMP && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setActiveProject(project)
+                      }}
+                      className="mt-1 text-sm font-semibold text-indigo-600 transition-colors hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                    >
+                      See more
+                    </button>
+                  )}
+                </div>
 
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300"
+                      className="rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300"
                     >
                       {tag}
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-5 flex items-center gap-5 border-t border-slate-100 pt-4 dark:border-slate-800">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
-                  >
-                    Live demo
-                    <ExternalLinkIcon className="size-3.5" />
-                  </a>
-                  <a
-                    href={project.codeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
-                  >
-                    <GitHubIcon className="size-3.5" />
-                    Source
-                  </a>
-                </div>
+                <CardLinks project={project} />
               </div>
             </Reveal>
           ))}
