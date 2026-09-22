@@ -115,7 +115,7 @@ export const projects = [
     title: 'LRF — Construction Site Attendance',
     description:
       'A LINE app that runs daily site operations for construction crews. Workers time in from their phone and tag the subcontractor they are assigned to, log travel expenses as they go, and upload receipts and site documents that are read automatically through OCR. Supervisors get a live view of which subcontractors are on site and working at any moment.',
-    tags: ['Laravel', 'React JS', 'Render', 'Firebase Storage', 'GCP OCR', 'Claude'],
+    tags: ['Laravel', 'React JS', 'Render', 'Firebase Storage', 'GCP OCR', 'Claude Code', 'OpenRouter'],
     status: 'Under Development',
     media: [
       { type: 'image', src: '/images/lrf/4.png' },
