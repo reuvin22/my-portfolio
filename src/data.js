@@ -51,8 +51,8 @@ export const projects = [
     title: 'RagDex — Trading Journal',
     description:
       'Journal every trade. Trade with an edge. RagDex turns the trades you log into an honest read on your edge and your habits — the numbers you would never assemble by hand.',
-    tags: ['React', 'TypeScript', 'FastAPI', 'Firebase'],
-    status: 'In Development',
+    tags: ['React', 'TypeScript', 'FastAPI', 'Firebase', 'OpenRouter', 'GCP'],
+    status: 'Under Development',
     credentials: {
       note: 'Sign in with this demo account to explore the journal and dashboard.',
       fields: [
@@ -95,7 +95,7 @@ export const projects = [
     title: 'Line Mini App',
     description:
       'A LINE-based mini app that helps fresh graduates write a cover letter that actually lands them their first job. Users answer a short set of guided questions about their course, skills, and the role they are applying for, and the app turns those answers into a polished, ready-to-send cover letter they can edit and export — all inside the LINE chat they already use every day.',
-    tags: ['LINE API', 'React JS', 'Tailwind', 'Laravel', 'Vercel', 'cPanel'],
+    tags: ['LINE API', 'React JS', 'Tailwind', 'Laravel', 'Vercel', 'cPanel', 'OpenAI API'],
     status: 'Under Revision',
     media: [
       { type: 'image', src: '/images/Liff/Line.jpg' },
@@ -109,6 +109,19 @@ export const projects = [
     status: 'Under Revision',
     media: [
       { type: 'image', src: projectImage('Thrift Shop — Storefront', '#f43f5e', '#8b5cf6') },
+    ],
+  },
+  {
+    title: 'LRF — Construction Site Attendance',
+    description:
+      'A LINE app that runs daily site operations for construction crews. Workers time in from their phone and tag the subcontractor they are assigned to, log travel expenses as they go, and upload receipts and site documents that are read automatically through OCR. Supervisors get a live view of which subcontractors are on site and working at any moment.',
+    tags: ['Laravel', 'React JS', 'Render', 'Firebase Storage', 'GCP OCR', 'Claude'],
+    status: 'Under Development',
+    media: [
+      { type: 'image', src: '/images/lrf/4.png' },
+      { type: 'image', src: '/images/lrf/1.png' },
+      { type: 'image', src: '/images/lrf/2.png' },
+      { type: 'image', src: '/images/lrf/3.png' },
     ],
   },
 ]

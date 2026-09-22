@@ -25,13 +25,13 @@ export default function Carousel({ media }) {
   return (
     <div className="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
       {item.type === 'video' ? (
-        <video key={item.src} src={item.src} controls className="size-full object-cover" />
+        <video key={item.src} src={item.src} controls className="size-full object-contain" />
       ) : (
         <img
           key={item.src}
           src={item.src}
           alt={item.alt || `Slide ${index + 1}`}
-          className="size-full object-cover"
+          className="size-full object-contain"
         />
       )}
 
