@@ -6,6 +6,10 @@ import ProjectModal from './ProjectModal'
 import CredentialsModal from './CredentialsModal'
 import StatusBadge from './StatusBadge'
 
+/** Status filters, in display order; only the ones a project actually uses are shown. */
+const STATUS_ORDER = ['Live', 'Under Development', 'Under Revision', 'Not Live']
+const filters = ['All', ...STATUS_ORDER.filter((s) => projects.some((p) => p.status === s))]
+
 /** Descriptions longer than this get clamped to three lines with a "See more" link. */
 const DESCRIPTION_CLAMP = 110
 
@@ -46,6 +50,10 @@ function CardLinks({ project }) {
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null)
   const [credentialsProject, setCredentialsProject] = useState(null)
+  const [statusFilter, setStatusFilter] = useState('All')
+
+  const visibleProjects =
+    statusFilter === 'All' ? projects : projects.filter((p) => p.status === statusFilter)
 
   return (
     <section
@@ -62,8 +70,37 @@ export default function Projects() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {projects.map((project, i) => (
+        <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-2">
+          {filters.map((filter) => {
+            const active = filter === statusFilter
+            const count =
+              filter === 'All'
+                ? projects.length
+                : projects.filter((p) => p.status === filter).length
+
+            return (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setStatusFilter(filter)}
+                aria-pressed={active}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                  active
+                    ? 'border-indigo-600 bg-indigo-600 text-white'
+                    : 'border-slate-300 text-slate-600 hover:border-indigo-400 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-indigo-500 dark:hover:text-indigo-400'
+                }`}
+              >
+                {filter}
+                <span className={active ? 'ml-1.5 text-indigo-200' : 'ml-1.5 text-slate-400'}>
+                  {count}
+                </span>
+              </button>
+            )
+          })}
+        </Reveal>
+
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {visibleProjects.map((project, i) => (
             <Reveal
               as="article"
               key={project.title}
