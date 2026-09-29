@@ -34,13 +34,18 @@ function projectImage(label, from, to) {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
 }
 
+/** A project's `status` is one label or several; this always hands back a list. */
+export function statusList(project) {
+  return Array.isArray(project.status) ? project.status : [project.status]
+}
+
 /**
  * A project under revision hides its live/source links until the rework ships,
  * and a link only shows when the project actually has that URL.
  */
 export function projectLinks(project) {
   const usable = (url) => Boolean(url) && url !== '#'
-  if (project.status === 'Under Revision') return { live: false, code: false, any: false }
+  if (statusList(project).includes('Under Revision')) return { live: false, code: false, any: false }
   const live = usable(project.liveUrl)
   const code = usable(project.codeUrl)
   return { live, code, any: live || code }
@@ -52,7 +57,7 @@ export const projects = [
     description:
       'Journal every trade. Trade with an edge. RagDex turns the trades you log into an honest read on your edge and your habits — the numbers you would never assemble by hand.',
     tags: ['React', 'TypeScript', 'FastAPI', 'Firebase', 'OpenRouter', 'GCP'],
-    status: 'Under Development',
+    status: ['Under Development', 'Live'],
     credentials: {
       note: 'Sign in with this demo account to explore the journal and dashboard.',
       fields: [

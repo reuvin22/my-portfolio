@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { projects, projectLinks } from '../data'
+import { projects, projectLinks, statusList } from '../data'
 import { ExternalLinkIcon, GitHubIcon, KeyIcon } from './icons'
 import Reveal from './Reveal'
 import ProjectModal from './ProjectModal'
@@ -8,7 +8,10 @@ import StatusBadge from './StatusBadge'
 
 /** Status filters, in display order; only the ones a project actually uses are shown. */
 const STATUS_ORDER = ['Live', 'Under Development', 'Under Revision', 'Not Live']
-const filters = ['All', ...STATUS_ORDER.filter((s) => projects.some((p) => p.status === s))]
+const filters = [
+  'All',
+  ...STATUS_ORDER.filter((s) => projects.some((p) => statusList(p).includes(s))),
+]
 
 /** Descriptions longer than this get clamped to three lines with a "See more" link. */
 const DESCRIPTION_CLAMP = 110
@@ -53,7 +56,9 @@ export default function Projects() {
   const [statusFilter, setStatusFilter] = useState('All')
 
   const visibleProjects =
-    statusFilter === 'All' ? projects : projects.filter((p) => p.status === statusFilter)
+    statusFilter === 'All'
+      ? projects
+      : projects.filter((p) => statusList(p).includes(statusFilter))
 
   return (
     <section
@@ -76,7 +81,7 @@ export default function Projects() {
             const count =
               filter === 'All'
                 ? projects.length
-                : projects.filter((p) => p.status === filter).length
+                : projects.filter((p) => statusList(p).includes(filter)).length
 
             return (
               <button
@@ -123,7 +128,11 @@ export default function Projects() {
                   className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <StatusBadge status={project.status} className="absolute left-3 top-3" />
+                <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
+                  {statusList(project).map((status) => (
+                    <StatusBadge key={status} status={status} />
+                  ))}
+                </div>
                 {project.credentials && (
                   <button
                     type="button"

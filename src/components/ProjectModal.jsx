@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { CloseIcon, ExternalLinkIcon, GitHubIcon, KeyIcon } from './icons'
 import Carousel from './Carousel'
-import { projectLinks } from '../data'
+import { projectLinks, statusList } from '../data'
 import StatusBadge from './StatusBadge'
 
 export default function ProjectModal({ project, onClose, credentialsOpen, onShowCredentials }) {
@@ -59,7 +59,9 @@ export default function ProjectModal({ project, onClose, credentialsOpen, onShow
             <h3 id="project-modal-title" className="text-2xl font-bold text-slate-900 dark:text-white">
               {project.title}
             </h3>
-            <StatusBadge status={project.status} />
+            {statusList(project).map((status) => (
+              <StatusBadge key={status} status={status} />
+            ))}
           </div>
           <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
             {project.description}
