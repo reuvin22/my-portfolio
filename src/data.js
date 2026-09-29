@@ -143,6 +143,7 @@ export const projects = [
       { type: 'image', src: '/images/business/2.png' },
       { type: 'image', src: '/images/business/1.png' },
     ],
+    liveUrl: 'https://business-mauve-one.vercel.app/'
   },
 ]
 
