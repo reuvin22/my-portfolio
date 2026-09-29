@@ -130,6 +130,13 @@ export const projects = [
       'A workspace for small retailers to run their shop end to end. Owners create a business, manage products, inventory, orders, team members and delivery and payment options, and track revenue, profit, cost of goods and margin from a dashboard with weekly and monthly trends. A point-of-sale screen handles the counter itself — barcode search, a running cart, and cash, card, e-wallet or bank transfer checkout with receipts.',
     tags: ['React JS', 'FastAPI', 'Firebase', 'Cloudflare R2', 'Render', 'Vercel', 'Tailwind', 'Redis'],
     status: 'Live',
+    credentials: {
+      note: 'Sign in with this demo admin account to explore the dashboard and point of sale.',
+      fields: [
+        { label: 'Email', value: 'test@gmail.com' },
+        { label: 'Password', value: 'test123' },
+      ],
+    },
     media: [
       { type: 'image', src: '/images/business/3.png' },
       { type: 'image', src: '/images/business/4.png' },
