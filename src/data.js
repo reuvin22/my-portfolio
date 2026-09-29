@@ -124,6 +124,19 @@ export const projects = [
       { type: 'image', src: '/images/lrf/3.png' },
     ],
   },
+  {
+    title: 'POS & Store Management',
+    description:
+      'A workspace for small retailers to run their shop end to end. Owners create a business, manage products, inventory, orders, team members and delivery and payment options, and track revenue, profit, cost of goods and margin from a dashboard with weekly and monthly trends. A point-of-sale screen handles the counter itself — barcode search, a running cart, and cash, card, e-wallet or bank transfer checkout with receipts.',
+    tags: ['React JS', 'FastAPI', 'Firebase', 'Cloudflare R2', 'Render', 'Vercel', 'Tailwind', 'Redis'],
+    status: 'Live',
+    media: [
+      { type: 'image', src: '/images/business/3.png' },
+      { type: 'image', src: '/images/business/4.png' },
+      { type: 'image', src: '/images/business/2.png' },
+      { type: 'image', src: '/images/business/1.png' },
+    ],
+  },
 ]
 
 export const skills = [
