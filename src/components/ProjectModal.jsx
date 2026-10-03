@@ -31,7 +31,7 @@ export default function ProjectModal({ project, onClose, credentialsOpen, onShow
 
   return (
     <div
-      className="fixed inset-0 z-100 flex items-center justify-center overflow-y-auto bg-slate-900/60 p-4 backdrop-blur-sm animate-[fade-in_0.2s_ease-out]"
+      className="fixed inset-0 z-100 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-[fade-in_0.2s_ease-out]"
       onClick={onClose}
     >
       <div
@@ -39,9 +39,9 @@ export default function ProjectModal({ project, onClose, credentialsOpen, onShow
         aria-modal="true"
         aria-labelledby="project-modal-title"
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl animate-[modal-in_0.25s_ease-out] dark:bg-slate-900"
+        className="flex h-[min(88vh,720px)] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl animate-[modal-in_0.25s_ease-out] dark:bg-slate-900"
       >
-        <div className="relative">
+        <div className="relative shrink-0">
           <Carousel media={project.media} />
           <button
             ref={closeRef}
@@ -54,7 +54,7 @@ export default function ProjectModal({ project, onClose, credentialsOpen, onShow
           </button>
         </div>
 
-        <div className="max-h-[60vh] overflow-y-auto p-6 sm:p-8">
+        <div className="flex-1 overflow-y-auto p-6 sm:p-8">
           <div className="flex flex-wrap items-center gap-3">
             <h3 id="project-modal-title" className="text-2xl font-bold text-slate-900 dark:text-white">
               {project.title}
