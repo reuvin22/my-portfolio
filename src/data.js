@@ -57,7 +57,7 @@ export const projects = [
     description:
       'Journal every trade. Trade with an edge. RagDex turns the trades you log into an honest read on your edge and your habits — the numbers you would never assemble by hand.',
     tags: ['React', 'TypeScript', 'FastAPI', 'Firebase', 'OpenRouter', 'GCP'],
-    status: ['Paused', 'Under Development', 'Live'],
+    status: ['Paused', 'Live'],
     credentials: {
       note: 'Sign in with this demo account to explore the journal and dashboard.',
       fields: [
