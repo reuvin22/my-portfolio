@@ -7,7 +7,7 @@ import CredentialsModal from './CredentialsModal'
 import StatusBadge from './StatusBadge'
 
 /** Status filters, in display order; only the ones a project actually uses are shown. */
-const STATUS_ORDER = ['Live', 'Under Development', 'Under Revision', 'Not Live']
+const STATUS_ORDER = ['Live', 'Under Development', 'Under Revision', 'Paused', 'Not Live']
 const filters = [
   'All',
   ...STATUS_ORDER.filter((s) => projects.some((p) => statusList(p).includes(s))),
